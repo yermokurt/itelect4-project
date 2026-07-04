@@ -1,10 +1,6 @@
 import type { User, Course, Submission } from "../types/index";
 
-type studentUser = User & {
-    score: number;
-};
-
-function getUser(id: number): studentUser {
+function getUser(id: number) {
 return {
 id: id,
 name: "Juan dela Cruz",
