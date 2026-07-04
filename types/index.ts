@@ -7,6 +7,7 @@ name: string;
 email: string;
 role: "student" | "admin" | "instructor"; // only these values
 isActive: boolean;
+score: number;
 }
 
 export interface Course {

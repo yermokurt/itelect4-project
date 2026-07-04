@@ -1,6 +1,8 @@
 import type { User, Course, Submission } from "../types/index";
+// sample.js -- provided for GT1 Part 1
+// Task: convert to TS (rename sample.ts). Annotate all vars, params, return types
 
-function getUser(id: number) {
+function getUser(id: number): User {
 return {
 id: id,
 name: "Juan dela Cruz",
@@ -10,14 +12,14 @@ isActive: true,
 score: 95.5,
 };
 }
-function calculateGrade(score: number, maxScore: number) {
+function calculateGrade(score: number, maxScore: number): string {
 const percentage = (score / maxScore) * 100;
 if (percentage >= 90) return "A";
 if (percentage >= 80) return "B";
 if (percentage >= 70) return "C";
 return "F";
 }
-function formatCourse(name: string, units: number, semester: string) {
+function formatCourse(name: string, units: number, semester: string): string {
 return `${name} (${units} units) - ${semester}`;
 }
 const user = getUser(1);
