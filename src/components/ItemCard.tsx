@@ -1,25 +1,43 @@
-import { Item, ItemStatus } from '../types/index';
+import { Item } from '../types/index';
 
 interface ItemCardProps {
   item: Item;
-  onClaim: (id: number) => void;
+  onSelect: (item: Item) => void;
+  children?: React.ReactNode;
 }
 
-export const ItemCard = ({ item, onClaim }: ItemCardProps) => {
+const ItemCard = ({ item, onSelect, children }: ItemCardProps) => {
   
-  const handleClaimClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
-    onClaim(item.id); 
+    onSelect(item); 
+  };
+
+  const handleClaimClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault();
+    console.log("Claim ID:", item.id);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    console.log("Search:", e.target.value);
   };
 
   return (
     <div>
-      <h3>{item.title}</h3>
-      <p>{item.description}</p>
+
+      <button onClick={handleClick}>Select</button>
+      <input onChange={handleChange} placeholder="Search..." />
       
-      {item.status === ItemStatus.Lost && (
-        <button onClick={handleClaimClick}>Claim Item</button>
-      )}
+      <h3 style={{ color: 'White' }}>Item Name: {item.title}</h3>
+      <p>Item Description: {item.description}</p>
+      
+      <br></br>
+      <button onClick={handleClaimClick}>Claim</button>
+      {children}
     </div>
   );
 };
+
+export default ItemCard;
+
+

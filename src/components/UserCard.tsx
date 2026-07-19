@@ -4,11 +4,13 @@ interface UserCardProps {
   user: User;
 }
 
-export const UserCard = ({ user }: UserCardProps) => {
+const UserCard = ({ user }: UserCardProps) => {
   return (
     <div>
-      <h3>{user.name}</h3>
+      <h3 style={{ color: 'White' }}>User: {user.name}</h3>
       <p>Role: {user.role}</p>
     </div>
   );
 };
+
+export default UserCard;

@@ -40,6 +40,20 @@ export function getLatestEntry<T>(items: T[]): T | undefined {
     return items.length > 0 ? items[items.length - 1] : undefined;
 }
 
+
+//CONSTRAINED GENERIC FUNCTION
+export function getById<T extends { id: number }>(items: T[], id: number): T | undefined {
+    return items.find(item => item.id === id);
+}
+
+// GENERIC INTERFACE
+export interface ApiResponse<T> {
+  success: boolean;
+  data:    T;
+  message?: string;
+}
+
+
 // 3. UTILITY TYPES
 
 // Omit: For new item
@@ -47,3 +61,7 @@ export type CreateItemDTO = Omit<Item, "id">;
 
 // Partial: for updates
 export type ItemUpdate = Partial<Item>;
+
+
+
+
