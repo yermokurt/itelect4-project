@@ -25,7 +25,7 @@ const ItemCard = ({ item, onSelect, variant = "default", children }: ItemCardPro
     [ItemStatus.Found]: "bg-emerald-100 text-emerald-700 border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-400 dark:border-emerald-800",
     [ItemStatus.Claimed]: "bg-stone-200 text-stone-700 border-stone-300 dark:bg-stone-800 dark:text-stone-300 dark:border-stone-700",
   };
-
+ 
   return (
     <div
       className={`bg-stone-100 dark:bg-stone-900 border border-stone-300 dark:border-stone-800 shadow-md rounded-xl text-left flex flex-col justify-between transition-colors duration-300 ease-in-out ${
