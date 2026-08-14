@@ -1,7 +1,8 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { mockItems } from './ItemsPage';
+import { mockItems } from '../data/MockData';
 import ClaimBadge from '../components/ClaimBadge';
 import { ItemStatus } from '../types/index';
+
 
 const ItemDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
