@@ -15,3 +15,21 @@ To run this program:
 2. Verify there are no TypeScript errors by running npx tsc --noEmit in the terminal.
 
 3. Run the project using npx ts-node src/index.ts
+
+UI Pages:
+
+- Login Page
+![alt text](image.png)
+
+- Dashboard Page
+![alt text](image-1.png)
+
+- Items Page
+![alt text](image-2.png)
+
+- Item Details Page
+![alt text](image-3.png)
+
+- Not Found Page
+![alt text](image-4.png)
+
