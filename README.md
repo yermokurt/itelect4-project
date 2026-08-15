@@ -19,17 +19,17 @@ To run this program:
 UI Pages:
 
 - Login Page
-![alt text](image.png)
+![alt text](UI Screenhots/image.png)
 
 - Dashboard Page
-![alt text](image-1.png)
+![alt text](UI Screenhots/image-1.png)
 
 - Items Page
-![alt text](image-2.png)
+![alt text](UI Screenhots/image-2.png)
 
 - Item Details Page
-![alt text](image-3.png)
+![alt text](UI Screenhots/image-3.png)
 
 - Not Found Page
-![alt text](image-4.png)
+![alt text](UI Screenhots/image-4.png)
 
