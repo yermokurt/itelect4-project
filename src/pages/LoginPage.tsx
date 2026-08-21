@@ -24,6 +24,7 @@ const LoginPage = () => {
 
     // Pass the name and generate a fake email so the TS interface doesn't complain
     login('fake-jwt-token', {
+      id: 1,
       name: formattedName,
       email: `${formattedName.toLowerCase()}@campus.edu`,
     });
@@ -32,17 +33,17 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-orange-50 dark:bg-stone-950 text-stone-800 dark:text-orange-50 font-sans transition-colors duration-300 ease-in-out flex items-center justify-center p-4">
-      <div className="bg-stone-100 dark:bg-stone-900 border border-stone-300 dark:border-stone-800 p-8 rounded-2xl shadow-xl max-w-md w-full transition-colors duration-300 ease-in-out flex flex-col gap-6">
+    <div className="flex flex-1 items-center justify-center py-6">
+      <div className="flex w-full max-w-md flex-col gap-6 rounded-2xl border border-stone-300 bg-stone-100 p-8 shadow-xl transition-colors duration-300 ease-in-out dark:border-stone-800 dark:bg-stone-900">
         <div className="text-center">
           <div className="w-12 h-12 bg-teal-100/70 dark:bg-teal-950/70 text-teal-700 dark:text-teal-400 rounded-xl mx-auto mb-3 flex items-center justify-center text-2xl border border-teal-600/30 dark:border-teal-400/30">
             👋
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-teal-600 dark:text-teal-400 transition-colors duration-300 ease-in-out">
-            Welcome to Campus Tracker
+            Welcome to Campus Lost & Found
           </h1>
           <p className="text-xs text-stone-500 dark:text-stone-400 mt-1 transition-colors duration-300 ease-in-out">
-            Enter your name to access the system
+            Enter your name to browse and manage campus items
           </p>
         </div>
 

@@ -1,0 +1,85 @@
+{
+  "items": [
+    {
+      "id": "101",
+      "title": "Student ID",
+      "description": "Found near the library main door.",
+      "location": "Library",
+      "reportedByUserId": 1,
+      "status": "LOST"
+    },
+    {
+      "id": "102",
+      "title": "Wireless Earbuds",
+      "description": "Left on a table in the student center.",
+      "location": "Student Center",
+      "reportedByUserId": 2,
+      "status": "FOUND"
+    },
+    {
+      "id": "103",
+      "title": "Tumbler",
+      "description": "Returned to its owner after verification.",
+      "location": "Sports Complex",
+      "reportedByUserId": 3,
+      "status": "CLAIMED"
+    },
+    {
+      "id": "104",
+      "title": "Calculus Notebook",
+      "description": "Blue notebook with handwritten review notes inside.",
+      "location": "Engineering Building",
+      "reportedByUserId": 4,
+      "status": "LOST"
+    },
+    {
+      "id": "105",
+      "title": "USB Flash Drive",
+      "description": "Black 32 GB flash drive found beside a laboratory computer.",
+      "location": "Computer Laboratory",
+      "reportedByUserId": 5,
+      "status": "FOUND"
+    },
+    {
+      "id": "106",
+      "title": "Canvas Tote Bag",
+      "description": "Beige tote bag containing a reusable lunch container.",
+      "location": "Student Center",
+      "reportedByUserId": 6,
+      "status": "LOST"
+    },
+    {
+      "id": "107",
+      "title": "Scientific Calculator",
+      "description": "Calculator with a small name label on the back.",
+      "location": "Science Hall",
+      "reportedByUserId": 7,
+      "status": "FOUND"
+    },
+    {
+      "id": "108",
+      "title": "Gray Hoodie",
+      "description": "Hoodie recovered from the covered court after an event.",
+      "location": "Covered Court",
+      "reportedByUserId": 8,
+      "status": "FOUND"
+    },
+    {
+      "id": "109",
+      "title": "Library Card",
+      "description": "Library card found near the self-checkout station.",
+      "location": "Library",
+      "reportedByUserId": 9,
+      "status": "FOUND"
+    }
+  ],
+  "claims": [
+    {
+      "itemId": "103",
+      "claimerUserId": 1,
+      "dateClaimed": "2026-08-21",
+      "id": "znsgc8GadQM"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

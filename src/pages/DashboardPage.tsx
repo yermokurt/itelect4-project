@@ -1,14 +1,6 @@
 import { Link } from 'react-router-dom';
 import UserCard from '../components/UserCard';
-import { User } from '../types/index';
-
-const mockUser: User = {
-  id: 1,
-  name: "Kurt Yermo",
-  email: "kurt@example.com",
-  role: "student",
-  isActive: true,
-};
+import { currentStudent } from '../data/MockData';
 
 const DashboardPage = () => {
   return (
@@ -16,7 +8,7 @@ const DashboardPage = () => {
       {/* Hero Welcome Section */}
       <div className="bg-stone-100 dark:bg-stone-900 border border-stone-300 dark:border-stone-800 p-8 sm:p-12 rounded-2xl shadow-lg transition-colors duration-300 ease-in-out text-center flex flex-col items-center gap-4">
         <div className="w-full flex justify-center mb-2">
-          <UserCard user={mockUser} />
+          <UserCard user={currentStudent} />
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-stone-800 dark:text-orange-50 transition-colors duration-300 ease-in-out">

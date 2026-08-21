@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
+import ClaimsPage from './pages/ClaimsPage';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import ItemsPage from './pages/ItemsPage';
@@ -9,24 +10,18 @@ import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Public Route */}
+    <Routes>
+      <Route element={<Layout />}>
         <Route path="/login" element={<LoginPage />} />
-
-        {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
-          <Route element={<Layout />}>
-            <Route path="/" element={<DashboardPage />} />
-            <Route path="/items" element={<ItemsPage />} />
-            <Route path="/item/:id" element={<ItemDetailsPage />} />
-          </Route>
+          <Route index element={<DashboardPage />} />
+          <Route path="items" element={<ItemsPage />} />
+          <Route path="item/:id" element={<ItemDetailsPage />} />
+          <Route path="claims" element={<ClaimsPage />} />
         </Route>
-
-        {/* 404 Route */}
         <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+      </Route>
+    </Routes>
   );
 }
 
