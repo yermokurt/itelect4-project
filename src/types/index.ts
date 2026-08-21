@@ -62,6 +62,17 @@ export type CreateItemDTO = Omit<Item, "id">;
 // Partial: for updates
 export type ItemUpdate = Partial<Item>;
 
+// Session 7: JSON Server returns generated item IDs as strings.
+export type ApiItem = Omit<Item, "id"> & { id: string };
+
+export type NewItem = Omit<ApiItem, "id">;
+
+export type ApiClaim = Omit<Claim, "id" | "itemId"> & {
+  id: string;
+  itemId: string;
+};
+
+export type NewClaim = Omit<ApiClaim, "id">;
 
 
 

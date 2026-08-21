@@ -1,13 +1,15 @@
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export function usePrevious<T>(value: T): T | undefined {
-  const ref = useRef<T | undefined>(undefined);
+  const previousValueRef = useRef<T | undefined>(undefined);
 
   useEffect(() => {
-    ref.current = value;
+    previousValueRef.current = value;
   }, [value]);
 
-  return ref.current;
+  // This hook intentionally exposes the value committed by the previous render.
+  // eslint-disable-next-line react-hooks/refs
+  return previousValueRef.current;
 }
 
 export default usePrevious;

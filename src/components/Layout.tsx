@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
-import useToggle from '../hooks/useToggle';
+import { useUIStore } from '../store/useUIStore';
 
 const Layout = () => {
   const { token, user, logout } = useAuthStore();
   const navigate = useNavigate();
-  const [isDarkMode, toggleDarkMode] = useToggle(false);
+  const isDarkMode = useUIStore((state) => state.isDarkMode);
+  const toggleDarkMode = useUIStore((state) => state.toggleDarkMode);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -72,6 +73,18 @@ const Layout = () => {
               }
             >
               Browse Items
+            </NavLink>
+            <NavLink
+              to="/claims"
+              className={({ isActive }) =>
+                `text-xs font-semibold px-3 py-2 rounded-lg transition-colors duration-300 ease-in-out ${
+                  isActive
+                    ? 'bg-teal-600 text-white dark:bg-teal-700'
+                    : 'text-stone-700 dark:text-stone-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-stone-200 dark:hover:bg-stone-800'
+                }`
+              }
+            >
+              My Claims
             </NavLink>
             <button
               onClick={toggleDarkMode}
