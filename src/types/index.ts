@@ -13,6 +13,9 @@ export interface Claim {
     id: number;
     itemId: number;
     claimerUserId: number;
+    claimerName: string;
+    claimerEmail: string;
+    ownershipDetails: string;
     dateClaimed: string;
 }
 
