@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { useAuthStore } from '../store/useAuthStore';
 
 const LoginPage = () => {
@@ -13,20 +16,17 @@ const LoginPage = () => {
     e.preventDefault();
     setErrorMessage(null);
 
-    // Simple validation: Ensure they typed something
     if (!name.trim()) {
       setErrorMessage('Please enter your name.');
       return;
     }
 
-    // Format the name nicely (e.g., "kurt" -> "Kurt")
     const formattedName = name.trim().charAt(0).toUpperCase() + name.trim().slice(1);
 
-    // Pass the name and generate a fake email so the TS interface doesn't complain
     login('fake-jwt-token', {
       id: 1,
       name: formattedName,
-      email: `${formattedName.toLowerCase()}@campus.edu`,
+      email: `${formattedName.toLowerCase()}@dlsl.edu.ph`,
     });
 
     navigate('/');
@@ -55,24 +55,25 @@ const LoginPage = () => {
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5 text-left">
-            <label className="text-xs font-semibold text-stone-700 dark:text-stone-300 transition-colors duration-300 ease-in-out">
+            <Label htmlFor="name" className="text-foreground">
               Your Name
-            </label>
-            <input
+            </Label>
+            <Input
+              id="name"
               type="text"
               placeholder="e.g. Kurt"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2 text-sm bg-orange-50/50 dark:bg-stone-950 border border-stone-300 dark:border-stone-800 rounded-lg text-stone-800 dark:text-orange-50 placeholder-stone-400 focus:outline-none focus:ring-2 focus:ring-teal-600 dark:focus:ring-teal-400 transition-colors duration-300 ease-in-out"
+              className="h-10 border-stone-300 bg-orange-50/50 px-4 text-stone-800 placeholder:text-stone-400 dark:border-stone-800 dark:bg-stone-950 dark:text-orange-50"
             />
           </div>
 
-          <button
+          <Button
             type="submit"
-            className="w-full py-2.5 px-4 text-xs font-semibold rounded-lg bg-teal-600 hover:bg-teal-700 dark:bg-teal-700 dark:hover:bg-teal-600 text-white shadow-sm transition-colors duration-300 ease-in-out mt-2"
+            className="mt-2 h-10 w-full bg-teal-600 text-xs text-white hover:bg-teal-700 dark:bg-teal-700 dark:hover:bg-teal-600"
           >
             Enter System
-          </button>
+          </Button>
         </form>
       </div>
     </div>

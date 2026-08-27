@@ -6,7 +6,7 @@
       "description": "Found near the library main door.",
       "location": "Library",
       "reportedByUserId": 1,
-      "status": "LOST"
+      "status": "CLAIMED"
     },
     {
       "id": "102",
@@ -77,8 +77,20 @@
     {
       "itemId": "103",
       "claimerUserId": 1,
+      "claimerName": "Kurt Yermo",
+      "claimerEmail": "kurt.yermo@dlsl.edu.ph",
+      "ownershipDetails": "The tumbler has my initials under the base and a blue silicone handle.",
       "dateClaimed": "2026-08-21",
       "id": "znsgc8GadQM"
+    },
+    {
+      "itemId": "101",
+      "claimerUserId": 1,
+      "claimerName": "Kurt",
+      "claimerEmail": "kurt@dlsl.edu.ph",
+      "ownershipDetails": "Student ID HAHAHAHAHAH",
+      "dateClaimed": "2026-08-27",
+      "id": "oT8-A58bu_E"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
