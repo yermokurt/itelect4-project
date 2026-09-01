@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom';
 import UserCard from '../components/UserCard';
-import { currentStudent } from '../data/MockData';
+import { useAuthStore } from '../store/useAuthStore';
 
 const DashboardPage = () => {
+  const user = useAuthStore((state) => state.user);
+
   return (
     <div className="flex-1 flex flex-col gap-8 my-auto py-6">
       {/* Hero Welcome Section */}
       <div className="bg-stone-100 dark:bg-stone-900 border border-stone-300 dark:border-stone-800 p-8 sm:p-12 rounded-2xl shadow-lg transition-colors duration-300 ease-in-out text-center flex flex-col items-center gap-4">
         <div className="w-full flex justify-center mb-2">
-          <UserCard user={currentStudent} />
+          {user && <UserCard user={user} />}
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-stone-800 dark:text-orange-50 transition-colors duration-300 ease-in-out">

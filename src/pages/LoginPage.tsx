@@ -27,6 +27,8 @@ const LoginPage = () => {
       id: 1,
       name: formattedName,
       email: `${formattedName.toLowerCase()}@dlsl.edu.ph`,
+      role: 'student',
+      isActive: true,
     });
 
     navigate('/');

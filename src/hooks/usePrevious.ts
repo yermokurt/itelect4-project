@@ -7,8 +7,6 @@ export function usePrevious<T>(value: T): T | undefined {
     previousValueRef.current = value;
   }, [value]);
 
-  // This hook intentionally exposes the value committed by the previous render.
-  // eslint-disable-next-line react-hooks/refs
   return previousValueRef.current;
 }
 
