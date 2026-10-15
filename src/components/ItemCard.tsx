@@ -1,8 +1,8 @@
-import type { ApiItem } from "../types";
+import type { Item } from "../types";
 
 interface ItemCardProps {
-  item: ApiItem;
-  onSelect: (item: ApiItem) => void;
+  item: Item;
+  onSelect: (item: Item) => void;
   variant?: "default" | "compact";
 }
 

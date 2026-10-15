@@ -2,28 +2,23 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { createClaim, fetchItemById, updateItemStatus } from "@/api/client";
+import { fetchItemById, updateItemStatus } from "@/api/items";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { claimSchema, type ClaimFormValues } from "@/schemas/claimSchema";
 import { useAuthStore } from "@/store/useAuthStore";
-import { ItemStatus, type ApiItem } from "@/types";
-
-interface ClaimRequest {
-  item: ApiItem;
-  values: ClaimFormValues;
-}
+import { ItemStatus, type Item } from "@/types";
 
 function ItemDetailsPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const user = useAuthStore((state) => state.user);
-  const { data, isPending, isError, error } = useQuery<ApiItem>({
+  const token = useAuthStore((state) => state.token);
+  const { data, isPending, isError, error } = useQuery<Item>({
     queryKey: ["items", id],
-    queryFn: () => fetchItemById(id!),
-    enabled: id !== undefined,
+    queryFn: () => fetchItemById(id!, token!),
+    enabled: id !== undefined && token !== null,
   });
   const {
     register,
@@ -41,24 +36,13 @@ function ItemDetailsPage() {
   });
 
   const claimMutation = useMutation({
-    mutationFn: async ({ item, values }: ClaimRequest): Promise<ApiItem> => {
-      await createClaim({
-        itemId: item.id,
-        claimerUserId: user?.id ?? 1,
-        claimerName: values.claimerName,
-        claimerEmail: values.claimerEmail,
-        ownershipDetails: values.ownershipDetails,
-        dateClaimed: new Date().toISOString().slice(0, 10),
-      });
-
-      return updateItemStatus(item.id, ItemStatus.Claimed);
+    mutationFn: async (_values: ClaimFormValues): Promise<Item> => {
+      return updateItemStatus(data!.id, ItemStatus.Claimed, token!);
     },
-    onSuccess: async (claimedItem, claimRequest) => {
+    onSuccess: async (updatedItem) => {
       reset();
       await queryClient.invalidateQueries({ queryKey: ["items"] });
-      await queryClient.invalidateQueries({ queryKey: ["items", id] });
-      await queryClient.invalidateQueries({ queryKey: ["claims"] });
-      queryClient.setQueryData<ApiItem>(["items", claimRequest.item.id], claimedItem);
+      queryClient.setQueryData<Item>(["items", id], updatedItem);
     },
   });
 
@@ -68,7 +52,7 @@ function ItemDetailsPage() {
 
   const handleClaimSubmit = (values: ClaimFormValues): void => {
     if (data !== undefined) {
-      claimMutation.mutate({ item: data, values });
+      claimMutation.mutate(values);
     }
   };
 
@@ -158,7 +142,7 @@ function ItemDetailsPage() {
             {claimMutation.isError && <p className="rounded-lg border border-rose-300 bg-rose-100 p-3 text-xs text-rose-700 transition-colors duration-300 ease-in-out dark:border-rose-800 dark:bg-rose-950/60 dark:text-rose-400">{claimMutation.error.message}</p>}
 
             <Button type="submit" disabled={claimMutation.isPending} className="w-full bg-teal-600 text-white hover:bg-teal-700 dark:bg-teal-700 dark:hover:bg-teal-600">
-              {claimMutation.isPending ? "Saving Claim..." : "Submit Claim Request"}
+              {claimMutation.isPending ? "Saving Claim…" : "Submit Claim Request"}
             </Button>
           </form>
         ) : (

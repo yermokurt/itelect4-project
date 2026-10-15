@@ -1,37 +1,48 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useAuthStore } from '../store/useAuthStore';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useAuthStore } from "../store/useAuthStore";
+import { login } from "../api/auth";
+import { ApiError } from "../api/client";
 
 const LoginPage = () => {
-  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const login = useAuthStore((state) => state.login);
+  const loginStore = useAuthStore((state) => state.login);
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrorMessage(null);
 
-    if (!name.trim()) {
-      setErrorMessage('Please enter your name.');
+    if (!email.trim()) {
+      setErrorMessage("Please enter your email address.");
+      return;
+    }
+    if (!password) {
+      setErrorMessage("Please enter your password.");
       return;
     }
 
-    const formattedName = name.trim().charAt(0).toUpperCase() + name.trim().slice(1);
-
-    login('fake-jwt-token', {
-      id: 1,
-      name: formattedName,
-      email: `${formattedName.toLowerCase()}@dlsl.edu.ph`,
-      role: 'student',
-      isActive: true,
-    });
-
-    navigate('/');
+    setIsLoading(true);
+    try {
+      const { token, user } = await login({ email: email.trim(), password });
+      loginStore(token, user);
+      navigate("/");
+    } catch (err) {
+      if (err instanceof ApiError) {
+        setErrorMessage(err.message);
+      } else {
+        setErrorMessage("Something went wrong. Please try again.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -42,10 +53,10 @@ const LoginPage = () => {
             👋
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-teal-600 dark:text-teal-400 transition-colors duration-300 ease-in-out">
-            Welcome to Campus Lost & Found
+            Welcome to Campus Lost &amp; Found
           </h1>
           <p className="text-xs text-stone-500 dark:text-stone-400 mt-1 transition-colors duration-300 ease-in-out">
-            Enter your name to browse and manage campus items
+            Sign in to browse and manage campus items
           </p>
         </div>
 
@@ -57,26 +68,55 @@ const LoginPage = () => {
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5 text-left">
-            <Label htmlFor="name" className="text-foreground">
-              Your Name
+            <Label htmlFor="email" className="text-foreground">
+              Email address
             </Label>
             <Input
-              id="name"
-              type="text"
-              placeholder="e.g. Kurt"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              id="email"
+              type="email"
+              placeholder="e.g. kurt@dlsl.edu.ph"
+              value={email}
+              autoComplete="email"
+              disabled={isLoading}
+              onChange={(e) => setEmail(e.target.value)}
+              className="h-10 border-stone-300 bg-orange-50/50 px-4 text-stone-800 placeholder:text-stone-400 dark:border-stone-800 dark:bg-stone-950 dark:text-orange-50"
+            />
+          </div>
+
+          <div className="flex flex-col gap-1.5 text-left">
+            <Label htmlFor="password" className="text-foreground">
+              Password
+            </Label>
+            <Input
+              id="password"
+              type="password"
+              placeholder="Your password"
+              value={password}
+              autoComplete="current-password"
+              disabled={isLoading}
+              onChange={(e) => setPassword(e.target.value)}
               className="h-10 border-stone-300 bg-orange-50/50 px-4 text-stone-800 placeholder:text-stone-400 dark:border-stone-800 dark:bg-stone-950 dark:text-orange-50"
             />
           </div>
 
           <Button
             type="submit"
-            className="mt-2 h-10 w-full bg-teal-600 text-xs text-white hover:bg-teal-700 dark:bg-teal-700 dark:hover:bg-teal-600"
+            disabled={isLoading}
+            className="mt-2 h-10 w-full bg-teal-600 text-xs text-white hover:bg-teal-700 dark:bg-teal-700 dark:hover:bg-teal-600 disabled:opacity-60"
           >
-            Enter System
+            {isLoading ? "Signing in…" : "Sign In"}
           </Button>
         </form>
+
+        <p className="text-center text-xs text-stone-500 dark:text-stone-400">
+          Don&apos;t have an account?{" "}
+          <Link
+            to="/register"
+            className="font-semibold text-teal-600 hover:text-teal-700 dark:text-teal-400 dark:hover:text-teal-300 transition-colors"
+          >
+            Create one
+          </Link>
+        </p>
       </div>
     </div>
   );
