@@ -33,3 +33,8 @@ UI Pages:
 - Not Found Page
 ![alt text](UI Screenhots/image-4.png)
 
+LINKS
+
+Deployed Frontend Link: https://yermo-itelect4-project.vercel.app
+
+Deployed Backend Link: https://yermo-itelect4-backend.vercel.app
