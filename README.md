@@ -1,12 +1,12 @@
-Campus Lost and Found
+# Campus Lost and Found
     - A simple lost and found tracker, wherein users can report items they lost or found around campus. There are two users, the student and the admin, the student can report items found or claim item that they have lost, and the admin can verify the claim request and update the status of the item.
 
-Types and Interfaces Used:
+## Types and Interfaces Used:
     - Interfaces: User, Course, Submission
     - Enum: SubmissionStatus, and const enum Role
     - Generic: getFirst and getById
 
-Utility Types: Partial, Pick, Omit, and Record
+## Utility Types: Partial, Pick, Omit, and Record
 
 To run this program:
 
@@ -16,7 +16,16 @@ To run this program:
 
 3. Run the project using npx ts-node src/index.ts
 
-UI Pages:
+## LINKS
+
+Backend Repo: https://github.com/yermokurt/itelect4-backend
+
+Deployed Frontend Link: https://yermo-itelect4-project.vercel.app
+
+Deployed Backend Link: https://yermo-itelect4-backend.vercel.app
+
+
+## UI Pages:
 
 - Login Page
 ![alt text](UI Screenhots/image.png)
@@ -32,9 +41,3 @@ UI Pages:
 
 - Not Found Page
 ![alt text](UI Screenhots/image-4.png)
-
-LINKS
-
-Deployed Frontend Link: https://yermo-itelect4-project.vercel.app
-
-Deployed Backend Link: https://yermo-itelect4-backend.vercel.app
