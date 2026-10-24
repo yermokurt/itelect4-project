@@ -8,6 +8,7 @@ import DashboardPage from './pages/DashboardPage';
 import ItemsPage from './pages/ItemsPage';
 import ItemDetailsPage from './pages/ItemDetailsPage';
 import NotFoundPage from './pages/NotFoundPage';
+import ReviewPage from './pages/ReviewPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="items" element={<ItemsPage />} />
           <Route path="item/:id" element={<ItemDetailsPage />} />
           <Route path="claims" element={<ClaimsPage />} />
+          <Route path="review" element={<ReviewPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Route>

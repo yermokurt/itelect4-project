@@ -1,3 +1,6 @@
+import { useAuthStore } from "../store/useAuthStore";
+import type { AiReview } from "../types";
+
 const rawBase = import.meta.env.VITE_API_URL as string | undefined;
 
 if (!rawBase || rawBase.trim() === "") {
@@ -33,8 +36,9 @@ export async function request<T>(
 
   const headers: Record<string, string> = {};
 
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
+  const activeToken = token !== undefined ? token : useAuthStore.getState().token;
+  if (activeToken) {
+    headers["Authorization"] = `Bearer ${activeToken}`;
   }
 
   if (body !== undefined) {
@@ -62,9 +66,12 @@ export async function request<T>(
   if (!response.ok) {
     let message = `Request failed (${response.status} ${response.statusText})`;
     try {
-      const errBody = (await response.json()) as { message?: string };
+      const errBody = (await response.json()) as { message?: string; errors?: string[] };
       if (errBody.message) {
         message = errBody.message;
+        if (Array.isArray(errBody.errors) && errBody.errors.length > 0) {
+          message = `${message}: ${errBody.errors.join(", ")}`;
+        }
       }
     } catch {
     }
@@ -72,4 +79,13 @@ export async function request<T>(
   }
 
   return response.json() as Promise<T>;
+}
+
+export async function askAi(prompt: string): Promise<AiReview> {
+  const token = useAuthStore.getState().token;
+  return request<AiReview>("/api/ai", {
+    method: "POST",
+    token,
+    body: { prompt },
+  });
 }

@@ -29,7 +29,6 @@ const Layout = () => {
   return (
     <div className="min-h-screen bg-orange-50 dark:bg-stone-950 text-stone-800 dark:text-orange-50 font-sans transition-colors duration-300 ease-in-out flex flex-col">
       <div className="max-w-6xl mx-auto w-full px-4 py-8 flex flex-col min-h-screen gap-6 flex-1">
-        {/* Header / Navbar */}
         <header className="bg-stone-100 dark:bg-stone-900 border border-stone-300 dark:border-stone-800 shadow-md p-6 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-4 transition-colors duration-300 ease-in-out">
           <div className="flex items-center justify-between w-full md:w-auto gap-4">
             <div>
@@ -86,6 +85,18 @@ const Layout = () => {
             >
               My Claims
             </NavLink>
+            <NavLink
+              to="/review"
+              className={({ isActive }) =>
+                `text-xs font-semibold px-3 py-2 rounded-lg transition-colors duration-300 ease-in-out ${
+                  isActive
+                    ? 'bg-teal-600 text-white dark:bg-teal-700'
+                    : 'text-stone-700 dark:text-stone-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-stone-200 dark:hover:bg-stone-800'
+                }`
+              }
+            >
+              AI Review
+            </NavLink>
             <button
               onClick={toggleDarkMode}
               className="hidden md:flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-orange-50 hover:bg-stone-300 dark:hover:bg-stone-700 transition-colors duration-300 ease-in-out"
@@ -108,12 +119,10 @@ const Layout = () => {
           </nav>
         </header>
 
-        {/* Main Content View */}
         <main className="flex-1 flex flex-col">
           <Outlet />
         </main>
 
-        {/* Footer */}
         <footer className="py-4 border-t border-stone-300 dark:border-stone-800 text-center text-xs text-stone-500 dark:text-stone-400 transition-colors duration-300 ease-in-out">
           <p>© 2026 Campus Lost & Found System</p>
         </footer>
