@@ -7,7 +7,6 @@ const DashboardPage = () => {
 
   return (
     <div className="flex-1 flex flex-col gap-8 my-auto py-6">
-      {/* Hero Welcome Section */}
       <div className="bg-stone-100 dark:bg-stone-900 border border-stone-300 dark:border-stone-800 p-8 sm:p-12 rounded-2xl shadow-lg transition-colors duration-300 ease-in-out text-center flex flex-col items-center gap-4">
         <div className="w-full flex justify-center mb-2">
           {user && <UserCard user={user} />}
@@ -21,7 +20,6 @@ const DashboardPage = () => {
         </p>
       </div>
 
-      {/* Centered Hero Action Card */}
       <div className="max-w-xl mx-auto w-full">
         <Link
           to="/items"
